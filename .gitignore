@@ -4,3 +4,5 @@ storage/
 *.pyc
 venv/
 .env
+.coverage
+htmlcov/

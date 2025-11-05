@@ -112,14 +112,14 @@ pip install -r requirements.txt
 ```
 
 4. **Execute o aplicativo**
-```bash
+```bashpytest tests/ --cov=dice_simulator --cov-report=html
 python dice_simulator.py
 ```
 
 ### Instalação Rápida (uma linha)
 
 ```bash
-git clone https://github.com/seu-usuario/dice-lab-py.git && cd dice-lab-py && pip install flet && python dice_simulator.py
+git clone https://github.com/seu-usuario/dice-lab-py.git && cd dice-lab-py && pip install -r requirements.txt && python dice_simulator.py
 ```
 
 ## 🚀 Como Usar
@@ -184,18 +184,20 @@ git clone https://github.com/seu-usuario/dice-lab-py.git && cd dice-lab-py && pi
 ```
 dice-lab-py/
 │
-├── dice_simulator.py       # Arquivo principal do aplicativo
+├── dice_simulator.py       # Interface gráfica e controles do aplicativo
+├── dice_logic.py          # Lógica principal (probabilidades e simulações)
 ├── requirements.txt        # Dependências do projeto
-├── README.md              # Este arquivo
+├── README.md              # Documentação principal
 ├── LICENSE                # Licença do projeto
-├── .gitignore            # Arquivos ignorados pelo Git
+├── pytest.ini            # Configurações do pytest
+├── .gitignore            # Configuração de arquivos ignorados
 │
-├── docs/                 # Documentação adicional (opcional)
-│   ├── screenshots/      # Capturas de tela
-│   └── examples.md       # Exemplos de uso
+├── docs/                  # Documentação adicional
+│   └── guia-de-testes.md # Guia de testes e desenvolvimento
 │
-└── tests/                # Testes unitários (futuro)
-    └── test_simulator.py
+└── tests/                # Testes unitários e de integração
+    └── test_dice_simulator.py     # Testes da lógica principal
+
 ```
 
 ### Principais Funções

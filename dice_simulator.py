@@ -257,6 +257,7 @@ def main(page: ft.Page):
             # Esconde o indicador de carregamento
             progress_ring.visible = False
             btn_simular.disabled = False
+            page.update()  # Atualiza a UI para refletir a mudança no botão
             
             # Mostra mensagem de sucesso
             page.show_snack_bar(

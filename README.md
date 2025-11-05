@@ -273,16 +273,16 @@ Contribuições são muito bem-vindas! Este é um projeto educacional e toda aju
 
 ## 🗺️ Roadmap
 
-- [ ] Versão básica funcional
-- [ ] Interface responsiva
-- [ ] Gráficos interativos
+- [x] Versão básica funcional
+- [x] Interface responsiva
+- [x] Gráficos interativos
 - [ ] Exportar resultados para CSV
 - [ ] Salvar configurações favoritas
 - [ ] Modo escuro
 - [ ] Comparar múltiplas simulações
 - [ ] Estatísticas avançadas (média, desvio padrão, variância)
 - [ ] Histórico de simulações
-- [ ] Testes unitários completos
+- [x] Testes unitários completos
 - [ ] Deploy como aplicativo web (WASM)
 
 ## 📄 Licença
@@ -303,7 +303,7 @@ copies of the Software...
 
 ## 📞 Contato
 
-**Guilherme Kulkamp** - [@gkulkamp](https://twitter.com/gkulkamp)
+**Guilherme Kulkamp** - [Site](https://guilhermekulkamp.com.br)
 
 **Link do Projeto**: [https://github.com/GuilhermeKulkamp/dice-lab-py](https://github.com/GuilhermeKulkamp/dice-lab-py)
 
@@ -340,6 +340,6 @@ copies of the Software...
 
 Feito com ❤️ e 🎲 em Python
 
-[Reportar Bug](https://github.com/seu-usuario/dice-lab-py/issues) · [Solicitar Feature](https://github.com/seu-usuario/dice-lab-py/issues) · [Documentação](https://github.com/seu-usuario/dice-lab-py/wiki)
+[Reportar Bug](https://github.com/GuilhermeKulkamp/dice-lab-py/issues) · [Solicitar Feature](https://github.com/GuilhermeKulkamp/dice-lab-py/issues) · [Documentação](https://github.com/GuilhermeKulkamp/dice-lab-py/wiki)
 
 </div>

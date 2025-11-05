@@ -273,14 +273,13 @@ Contribuições são muito bem-vindas! Este é um projeto educacional e toda aju
 
 ## 🗺️ Roadmap
 
-- [x] Versão básica funcional
-- [x] Interface responsiva
-- [x] Gráficos interativos
+- [ ] Versão básica funcional
+- [ ] Interface responsiva
+- [ ] Gráficos interativos
 - [ ] Exportar resultados para CSV
 - [ ] Salvar configurações favoritas
 - [ ] Modo escuro
 - [ ] Comparar múltiplas simulações
-- [ ] Suporte para dados customizados (D3, D7, etc.)
 - [ ] Estatísticas avançadas (média, desvio padrão, variância)
 - [ ] Histórico de simulações
 - [ ] Testes unitários completos
@@ -304,9 +303,9 @@ copies of the Software...
 
 ## 📞 Contato
 
-**Seu Nome** - [@seu_twitter](https://twitter.com/seu_twitter) - seu.email@exemplo.com
+**Guilherme Kulkamp** - [@gkulkamp](https://twitter.com/gkulkamp)
 
-**Link do Projeto**: [https://github.com/seu-usuario/dice-lab-py](https://github.com/seu-usuario/dice-lab-py)
+**Link do Projeto**: [https://github.com/GuilhermeKulkamp/dice-lab-py](https://github.com/GuilhermeKulkamp/dice-lab-py)
 
 ---
 

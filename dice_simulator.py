@@ -1,8 +1,5 @@
 import flet as ft
-from itertools import product
-from collections import Counter
-import random
-from math import comb
+from dice_logic import calcular_probabilidades, simular_jogadas
 
 def main(page: ft.Page):
     """
@@ -29,12 +26,22 @@ def main(page: ft.Page):
         Calcula todas as combinações possíveis e suas probabilidades.
         
         Args:
-            num_dados: Quantidade de dados a serem jogados
-            lados: Número de lados de cada dado
+            num_dados: Quantidade de dados a serem jogados (inteiro > 0)
+            lados: Número de lados de cada dado (inteiro > 0)
             
         Returns:
             Dicionário com somas possíveis e suas probabilidades
+            
+        Raises:
+            ValueError: Se os parâmetros não forem inteiros positivos
         """
+        # Valida os parâmetros
+        if not isinstance(num_dados, int) or not isinstance(lados, int):
+            raise ValueError("Quantidade de dados e número de lados devem ser números inteiros")
+        
+        if num_dados <= 0 or lados <= 0:
+            raise ValueError("Quantidade de dados e número de lados devem ser maiores que zero")
+            
         # Gera todas as combinações possíveis de resultados
         # product() cria o produto cartesiano - todas as combinações
         # Ex: 2 dados D6 = (1,1), (1,2), (1,3)... (6,6) = 36 combinações
@@ -389,6 +396,9 @@ def main(page: ft.Page):
         )
     )
 
-# Inicia o aplicativo
-# Para executar, use: flet run nome_do_arquivo.py
-ft.app(target=main)
+# Exporta as funções para serem usadas em testes
+__all__ = ['calcular_probabilidades', 'simular_jogadas']
+
+# Inicia o aplicativo apenas se executado diretamente
+if __name__ == '__main__':
+    ft.app(target=main)

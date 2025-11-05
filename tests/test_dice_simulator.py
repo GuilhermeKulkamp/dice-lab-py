@@ -17,35 +17,17 @@ from itertools import product
 import random
 
 # ============================================
-# FUNÇÕES EXTRAÍDAS DO APLICATIVO PARA TESTE
+# Importa as funções do módulo de lógica
 # ============================================
-# Para testar, precisamos extrair as funções de lógica do arquivo principal
-# e importá-las. Por enquanto, vou replicá-las aqui para demonstração.
+import sys
+from pathlib import Path
 
-def calcular_probabilidades(num_dados, lados):
-    """
-    Calcula todas as combinações possíveis e suas probabilidades.
-    """
-    todas_combinacoes = list(product(range(1, lados + 1), repeat=num_dados))
-    somas = [sum(comb) for comb in todas_combinacoes]
-    contagem = Counter(somas)
-    total_combinacoes = len(todas_combinacoes)
-    probabilidades = {
-        soma: (count / total_combinacoes) * 100 
-        for soma, count in sorted(contagem.items())
-    }
-    return probabilidades
+# Adiciona o diretório raiz ao PYTHONPATH para permitir imports relativos
+project_root = str(Path(__file__).parent.parent)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
-
-def simular_jogadas(num_dados, lados, num_jogadas):
-    """
-    Simula as jogadas de dados e retorna os resultados.
-    """
-    resultados = []
-    for _ in range(num_jogadas):
-        jogada = sum(random.randint(1, lados) for _ in range(num_dados))
-        resultados.append(jogada)
-    return Counter(resultados)
+from dice_logic import calcular_probabilidades, simular_jogadas
 
 
 # ============================================

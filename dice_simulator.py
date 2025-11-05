@@ -22,6 +22,30 @@ def main(page: ft.Page):
         visible=False
     )
     
+    def mostrar_mensagem(mensagem: str, sucesso: bool = True, duracao: int = 5000, mostrar_fechar: bool = True):
+        """
+        Exibe uma mensagem para o usuário usando o SnackBar.
+        
+        Args:
+            mensagem: Texto da mensagem a ser exibida
+            sucesso: True para mensagem de sucesso (verde), False para erro (vermelho)
+            duracao: Tempo em milissegundos que a mensagem ficará visível (padrão: 5000ms)
+            mostrar_fechar: Se True, mostra o ícone para fechar a mensagem (padrão: True)
+        """
+        # Define a cor baseada no tipo de mensagem
+        cor = ft.Colors.GREEN_400 if sucesso else ft.Colors.RED_400
+        
+        # Cria e abre um novo SnackBar com a mensagem
+        page.open(
+            ft.SnackBar(
+                content=ft.Text(mensagem),
+                bgcolor=cor,
+                duration=duracao,
+                show_close_icon=mostrar_fechar
+            )
+        )
+        page.update()
+    
     def criar_grafico(resultados_simulacao, probabilidades_teoricas, num_jogadas):
         """
         Cria um gráfico de barras com os resultados da simulação.
@@ -198,31 +222,32 @@ def main(page: ft.Page):
             # Cria o gráfico com os resultados
             criar_grafico(resultados, probabilidades, num_jogadas)
             
-            # Esconde o indicador de carregamento
+            # Prepara mudanças finais
             progress_ring.visible = False
             btn_simular.disabled = False
-            page.update()  # Atualiza a UI para refletir a mudança no botão
+            page.update()  # Atualiza o estado dos controles
             
-            # Mostra mensagem de sucesso
-            page.show_snack_bar(
-                ft.SnackBar(
-                    content=ft.Text("Simulação concluída com sucesso!"),
-                    bgcolor=ft.Colors.GREEN_400,
-                )
+            # Mostra mensagem de sucesso (3 segundos)
+            mostrar_mensagem(
+                "Simulação concluída com sucesso!",
+                sucesso=True,
+                duracao=3000,
+                mostrar_fechar=False
             )
-            page.update()
             
         except ValueError as error:
-            # Trata erros de validação
+            # Prepara mudanças para erro
             progress_ring.visible = False
             btn_simular.disabled = False
-            page.show_snack_bar(
-                ft.SnackBar(
-                    content=ft.Text(f"Erro: {str(error)}"),
-                    bgcolor=ft.Colors.RED_400,
-                )
+            page.update()  # Atualiza o estado dos controles
+            
+            # Mostra mensagem de erro (7 segundos e sempre com botão de fechar)
+            mostrar_mensagem(
+                f"Erro: {str(error)}",
+                sucesso=False,
+                duracao=7000,
+                mostrar_fechar=True
             )
-            page.update()
     
     # ========== CONSTRUÇÃO DA INTERFACE ==========
     

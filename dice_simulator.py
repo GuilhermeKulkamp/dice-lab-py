@@ -278,6 +278,13 @@ def main(page: ft.Page):
         width=250,
     )
     
+    def on_sair_click(e):
+        """
+        Função chamada quando o botão 'Sair' é clicado.
+        Fecha o aplicativo.
+        """
+        page.window.destroy()
+    
     # Botão de simular
     btn_simular = ft.ElevatedButton(
         text="Simular Jogadas",
@@ -286,6 +293,17 @@ def main(page: ft.Page):
         style=ft.ButtonStyle(
             color=ft.Colors.WHITE,
             bgcolor=ft.Colors.BLUE_400,
+        ),
+    )
+    
+    # Botão de sair
+    btn_sair = ft.ElevatedButton(
+        text="Sair",
+        icon=ft.Icons.EXIT_TO_APP,
+        on_click=on_sair_click,
+        style=ft.ButtonStyle(
+            color=ft.Colors.WHITE,
+            bgcolor=ft.Colors.RED_400,
         ),
     )
     
@@ -326,7 +344,12 @@ def main(page: ft.Page):
                                     ],
                                 ),
                                 ft.Row(
-                                    controls=[btn_simular, progress_ring],
+                                    controls=[
+                                        btn_simular,
+                                        progress_ring,
+                                        ft.Container(width=20),  # Espaçamento entre os botões
+                                        btn_sair
+                                    ],
                                     alignment=ft.MainAxisAlignment.CENTER,
                                 ),
                             ],

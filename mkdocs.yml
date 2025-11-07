@@ -1,0 +1,336 @@
+# Configuração do MkDocs para Dice Lab Py
+# Este arquivo controla toda a estrutura e aparência da documentação
+
+# ============================================
+# INFORMAÇÕES DO SITE
+# ============================================
+site_name: Dice Lab Py
+site_description: Simulador de dados em Python com análise de probabilidades e gráficos interativos
+site_author: Seu Nome
+site_url: https://seu-usuario.github.io/dice-lab-py/
+
+# ============================================
+# REPOSITÓRIO
+# ============================================
+repo_name: seu-usuario/dice-lab-py
+repo_url: https://github.com/seu-usuario/dice-lab-py
+edit_uri: edit/main/docs/
+
+# ============================================
+# COPYRIGHT
+# ============================================
+copyright: Copyright &copy; 2024 Seu Nome
+
+# ============================================
+# TEMA MATERIAL
+# ============================================
+theme:
+  name: material
+  language: pt-BR
+  
+  # Paleta de cores (modo claro e escuro)
+  palette:
+    # Modo claro
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Alternar para modo escuro
+    
+    # Modo escuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Alternar para modo claro
+  
+  # Fontes
+  font:
+    text: Roboto
+    code: Roboto Mono
+  
+  # Ícones
+  icon:
+    logo: material/dice-multiple
+    repo: fontawesome/brands/github
+  
+  # Features avançadas
+  features:
+    # Navegação
+    - navigation.instant        # SPA-like (Single Page Application)
+    - navigation.tracking       # Sincroniza URL com scroll
+    - navigation.tabs           # Tabs no topo
+    - navigation.tabs.sticky    # Tabs fixas ao rolar
+    - navigation.sections       # Seções na sidebar
+    - navigation.expand         # Expande seções por padrão
+    - navigation.path           # Breadcrumbs
+    - navigation.indexes        # Index pages para seções
+    - navigation.top            # Botão "Voltar ao topo"
+    - navigation.footer         # Navegação no rodapé
+    
+    # Busca
+    - search.suggest            # Sugestões enquanto digita
+    - search.highlight          # Destaca termos buscados
+    - search.share              # Compartilhar busca
+    
+    # Conteúdo
+    - content.code.copy         # Botão copiar código
+    - content.code.annotate     # Anotações no código
+    - content.tabs.link         # Sincroniza tabs
+    - content.tooltips          # Tooltips em abreviações
+    
+    # Header
+    - header.autohide          # Esconde header ao rolar
+
+# ============================================
+# ESTRUTURA DE NAVEGAÇÃO
+# ============================================
+nav:
+  - Home: index.md
+  
+  - Começando:
+    - Instalação: instalacao.md
+    - Primeiro Uso: uso.md
+    - Exemplos Rápidos: exemplos.md
+  
+  - Tutoriais:
+    - Para Iniciantes: tutoriais/iniciante.md
+    - Uso Avançado: tutoriais/avancado.md
+    - RPG e Jogos: tutoriais/rpg.md
+    - Análise Estatística: tutoriais/estatistica.md
+  
+  - Documentação:
+    - Teoria Probabilística: teoria.md
+    - Referência da API: api.md
+    - Decisões Técnicas: decisoes-tecnicas.md
+    - Perguntas Frequentes: faq.md
+  
+  - Desenvolvimento:
+    - Guia de Contribuição: desenvolvimento.md
+    - Testes: testes.md
+    - Estrutura do Código: estrutura.md
+    - Changelog: changelog.md
+  
+  - Links:
+    - GitHub: https://github.com/seu-usuario/dice-lab-py
+    - Reportar Bug: https://github.com/seu-usuario/dice-lab-py/issues
+
+# ============================================
+# PLUGINS
+# ============================================
+plugins:
+  # Busca
+  - search:
+      lang: 
+        - pt
+        - en
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  
+  # Data de revisão Git
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: datetime
+      timezone: America/Sao_Paulo
+      locale: pt
+      fallback_to_build_date: true
+  
+  # Minificação (produção)
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+  
+  # Documentação automática do código
+  - mkdocstrings:
+      enabled: true
+      default_handler: python
+      handlers:
+        python:
+          options:
+            # Estilo de docstrings
+            docstring_style: google
+            docstring_section_style: table
+            
+            # O que mostrar
+            show_source: true
+            show_root_heading: true
+            show_root_full_path: false
+            show_object_full_path: false
+            show_category_heading: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            
+            # Membros
+            members_order: source
+            group_by_category: true
+            show_if_no_docstring: false
+            
+            # Assinaturas
+            show_signature: true
+            show_signature_annotations: true
+            separate_signature: true
+            
+            # Filtros
+            filters:
+              - "!^_"  # Exclui métodos privados
+            
+            # Merge
+            merge_init_into_class: true
+            
+            # Heading
+            heading_level: 2
+
+# ============================================
+# EXTENSÕES MARKDOWN
+# ============================================
+markdown_extensions:
+  # Python Markdown nativo
+  - abbr                        # Abreviações com tooltips
+  - admonition                  # Blocos de aviso/nota
+  - attr_list                   # Atributos em elementos
+  - def_list                    # Listas de definição
+  - footnotes                   # Notas de rodapé
+  - md_in_html                  # Markdown dentro de HTML
+  - tables                      # Tabelas
+  - toc:                        # Índice
+      permalink: true
+      permalink_title: Link permanente
+      toc_depth: 3
+  
+  # PyMdown Extensions
+  - pymdownx.arithmatex:        # Fórmulas matemáticas
+      generic: true
+  
+  - pymdownx.betterem:          # Melhor formatação de ênfase
+      smart_enable: all
+  
+  - pymdownx.caret              # Texto sobrescrito (^)
+  - pymdownx.mark               # Texto marcado (==)
+  - pymdownx.tilde              # Texto subscrito (~)
+  
+  - pymdownx.critic             # Marcação de revisão
+  
+  - pymdownx.details            # Blocos colapsáveis
+  
+  - pymdownx.emoji:             # Emojis
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  
+  - pymdownx.highlight:         # Highlight de código
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      auto_title: true
+      linenums: true
+  
+  - pymdownx.inlinehilite       # Código inline com highlight
+  
+  - pymdownx.keys               # Teclas do teclado
+  
+  - pymdownx.smartsymbols       # Símbolos inteligentes
+  
+  - pymdownx.snippets:          # Incluir arquivos externos
+      base_path: docs
+      check_paths: true
+  
+  - pymdownx.superfences:       # Code fences avançados
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  
+  - pymdownx.tabbed:            # Tabs
+      alternate_style: true
+      combine_header_slug: true
+  
+  - pymdownx.tasklist:          # Lista de tarefas
+      custom_checkbox: true
+      clickable_checkbox: true
+
+# ============================================
+# EXTRAS (CSS, JS, etc)
+# ============================================
+extra_css:
+  - assets/css/extra.css
+
+extra_javascript:
+  # MathJax para fórmulas matemáticas
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# ============================================
+# INFORMAÇÕES EXTRAS
+# ============================================
+extra:
+  # Redes sociais
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/seu-usuario
+      name: GitHub
+    
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/seu_usuario
+      name: Twitter
+    
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/seu-usuario
+      name: LinkedIn
+    
+    - icon: fontawesome/brands/youtube
+      link: https://youtube.com/@seu_canal
+      name: YouTube
+  
+  # Versioning (se usar mike)
+  version:
+    provider: mike
+    default: latest
+  
+  # Analytics (opcional)
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX  # Seu código do Google Analytics
+  
+  # Consentimento de cookies (LGPD)
+  consent:
+    title: Consentimento de cookies
+    description: >-
+      Usamos cookies para reconhecer suas visitas repetidas e preferências,
+      e para medir a eficácia da documentação e se os usuários encontram
+      o que procuram. Com seu consentimento, você nos ajuda a melhorar.
+    actions:
+      - accept
+      - reject
+      - manage
+
+# ============================================
+# VALIDAÇÃO
+# ============================================
+validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+    absolute_links: warn
+  links:
+    not_found: warn
+    absolute_links: warn
+    unrecognized_links: warn
+
+# ============================================
+# HOOKS (Scripts personalizados)
+# ============================================
+# hooks:
+#   - hooks/custom_hook.py
+
+# ============================================
+# WATCH (arquivos para monitorar em dev)
+# ============================================
+watch:
+  - dice_simulator.py
+  - mkdocs.yml

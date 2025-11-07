@@ -6,20 +6,20 @@
 # ============================================
 site_name: Dice Lab Py
 site_description: Simulador de dados em Python com análise de probabilidades e gráficos interativos
-site_author: Seu Nome
-site_url: https://seu-usuario.github.io/dice-lab-py/
+site_author: Guilherme Kulkamp
+site_url: https://GuilhermeKulkamp.github.io/dice-lab-py/
 
 # ============================================
 # REPOSITÓRIO
 # ============================================
-repo_name: seu-usuario/dice-lab-py
-repo_url: https://github.com/seu-usuario/dice-lab-py
+repo_name: GuilhermeKulkamp/dice-lab-py
+repo_url: https://github.com/GuilhermeKulkamp/dice-lab-py
 edit_uri: edit/main/docs/
 
 # ============================================
 # COPYRIGHT
 # ============================================
-copyright: Copyright &copy; 2024 Seu Nome
+copyright: Copyright &copy; 2025 Guilherme Kulkamp. Todos os direitos reservados.
 
 # ============================================
 # TEMA MATERIAL
@@ -116,8 +116,8 @@ nav:
     - Changelog: changelog.md
   
   - Links:
-    - GitHub: https://github.com/seu-usuario/dice-lab-py
-    - Reportar Bug: https://github.com/seu-usuario/dice-lab-py/issues
+    - GitHub: https://github.com/GuilhermeKulkamp/dice-lab-py
+    - Reportar Bug: https://github.com/GuilhermeKulkamp/dice-lab-py/issues
 
 # ============================================
 # PLUGINS
@@ -272,19 +272,19 @@ extra:
   # Redes sociais
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/seu-usuario
+      link: https://github.com/GuilhermeKulkamp
       name: GitHub
     
     - icon: fontawesome/brands/twitter
-      link: https://twitter.com/seu_usuario
+      link: https://twitter.com/gkulkamp 
       name: Twitter
     
     - icon: fontawesome/brands/linkedin
-      link: https://linkedin.com/in/seu-usuario
+      link: https://linkedin.com/in/guilhermekulkamp
       name: LinkedIn
     
     - icon: fontawesome/brands/youtube
-      link: https://youtube.com/@seu_canal
+      link: https://youtube.com/@GuilhermeKulkamp
       name: YouTube
   
   # Versioning (se usar mike)

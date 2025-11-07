@@ -1,0 +1,799 @@
+# 📚 Guia de Documentação com MkDocs - Dice Lab Py
+
+## 📋 Índice
+1. [O que é MkDocs](#o-que-é-mkdocs)
+2. [Instalação](#instalação)
+3. [Estrutura do Projeto](#estrutura-do-projeto)
+4. [Configuração Básica](#configuração-básica)
+5. [Criando a Documentação](#criando-a-documentação)
+6. [Temas e Personalização](#temas-e-personalização)
+7. [Deploy no GitHub Pages](#deploy-no-github-pages)
+8. [Comandos Úteis](#comandos-úteis)
+
+---
+
+## 🎯 O que é MkDocs
+
+MkDocs é um gerador de documentação estática que:
+- 📝 Usa arquivos Markdown simples
+- 🎨 Gera sites HTML profissionais
+- 🚀 Integra facilmente com GitHub Pages
+- 🔍 Inclui busca integrada
+- 📱 É totalmente responsivo
+
+**Resultado final**: Um site de documentação bonito e profissional como o da [Python Requests](https://requests.readthedocs.io/)
+
+---
+
+## 🔧 Instalação
+
+### Passo 1: Instalar MkDocs e Plugins
+
+```bash
+# Instalação básica
+pip install mkdocs
+
+# Instalação com tema Material (RECOMENDADO)
+pip install mkdocs-material
+
+# Plugins úteis
+pip install mkdocstrings[python]  # Gera docs do código
+pip install mkdocs-git-revision-date-localized-plugin  # Data de modificação
+pip install mkdocs-minify-plugin  # Minifica HTML/CSS/JS
+pip install pymdown-extensions  # Extensões markdown
+```
+
+### Passo 2: Atualizar requirements.txt
+
+Crie um arquivo `requirements-docs.txt`:
+
+```txt
+# requirements-docs.txt
+mkdocs>=1.5.0
+mkdocs-material>=9.4.0
+mkdocstrings[python]>=0.24.0
+mkdocs-git-revision-date-localized-plugin>=1.2.0
+mkdocs-minify-plugin>=0.7.0
+pymdown-extensions>=10.0
+```
+
+---
+
+## 📂 Estrutura do Projeto
+
+Após configurar, seu projeto ficará assim:
+
+```
+dice-lab-py/
+│
+├── dice_simulator.py
+├── test_dice_simulator.py
+├── requirements.txt
+├── requirements-docs.txt
+│
+├── mkdocs.yml              # ← Configuração do MkDocs
+│
+└── docs/                   # ← Pasta de documentação
+    ├── index.md           # Página inicial
+    ├── instalacao.md      # Guia de instalação
+    ├── uso.md             # Como usar
+    ├── api.md             # Referência da API
+    ├── teoria.md          # Conceitos de probabilidade
+    ├── exemplos.md        # Exemplos práticos
+    ├── desenvolvimento.md # Guia para desenvolvedores
+    ├── changelog.md       # Histórico de mudanças
+    │
+    ├── assets/            # Recursos estáticos
+    │   ├── images/
+    │   │   ├── logo.png
+    │   │   └── screenshots/
+    │   └── css/
+    │       └── extra.css
+    │
+    └── tutoriais/         # Tutoriais detalhados
+        ├── iniciante.md
+        ├── avancado.md
+        └── rpg.md
+```
+
+---
+
+## ⚙️ Configuração Básica
+
+### Inicializar MkDocs
+
+```bash
+# Criar estrutura básica
+mkdocs new .
+
+# Isso cria:
+# - mkdocs.yml (arquivo de configuração)
+# - docs/ (pasta com index.md)
+```
+
+### Arquivo mkdocs.yml Completo
+
+```yaml
+# mkdocs.yml
+site_name: Dice Lab Py
+site_description: Simulador de dados em Python com análise de probabilidades
+site_author: Seu Nome
+site_url: https://seu-usuario.github.io/dice-lab-py/
+
+# Repositório
+repo_name: seu-usuario/dice-lab-py
+repo_url: https://github.com/seu-usuario/dice-lab-py
+edit_uri: edit/main/docs/
+
+# Copyright
+copyright: Copyright &copy; 2024 Seu Nome
+
+# Tema Material
+theme:
+  name: material
+  language: pt-BR
+  
+  # Paleta de cores
+  palette:
+    # Modo claro
+    - scheme: default
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Modo escuro
+    
+    # Modo escuro
+    - scheme: slate
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Modo claro
+  
+  # Ícones e fonte
+  font:
+    text: Roboto
+    code: Roboto Mono
+  
+  icon:
+    logo: material/dice-multiple
+    repo: fontawesome/brands/github
+  
+  # Features
+  features:
+    - navigation.instant      # Carregamento instantâneo
+    - navigation.tracking     # Tracking de URL
+    - navigation.tabs         # Abas de navegação
+    - navigation.sections     # Seções expansíveis
+    - navigation.expand       # Expandir por padrão
+    - navigation.top          # Botão voltar ao topo
+    - search.suggest          # Sugestões de busca
+    - search.highlight        # Destacar resultados
+    - content.code.copy       # Botão copiar código
+    - content.tabs.link       # Links entre tabs
+
+# Navegação
+nav:
+  - Home: index.md
+  - Começando:
+    - Instalação: instalacao.md
+    - Primeiro Uso: uso.md
+    - Exemplos: exemplos.md
+  - Tutoriais:
+    - Para Iniciantes: tutoriais/iniciante.md
+    - Uso Avançado: tutoriais/avancado.md
+    - RPG e Jogos: tutoriais/rpg.md
+  - Documentação:
+    - Teoria Probabilística: teoria.md
+    - Referência da API: api.md
+    - Decisões Técnicas: decisoes-tecnicas.md
+  - Desenvolvimento:
+    - Contribuindo: desenvolvimento.md
+    - Testes: testes.md
+    - Changelog: changelog.md
+
+# Plugins
+plugins:
+  - search:
+      lang: 
+        - pt
+        - en
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: datetime
+  - minify:
+      minify_html: true
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+
+# Extensões Markdown
+markdown_extensions:
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+  
+  # PyMdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# CSS e JavaScript extras
+extra_css:
+  - assets/css/extra.css
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# Informações extras
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/seu-usuario
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/seu_usuario
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/seu-usuario
+  
+  version:
+    provider: mike
+```
+
+---
+
+## 📝 Criando a Documentação
+
+### 1. docs/index.md (Página Inicial)
+
+```markdown
+# 🎲 Bem-vindo ao Dice Lab Py
+
+<div align="center">
+  <img src="assets/images/logo.png" alt="Dice Lab Py Logo" width="200"/>
+  
+  **Simulador de dados em Python com análise de probabilidades**
+  
+  [![GitHub](https://img.shields.io/github/stars/seu-usuario/dice-lab-py?style=social)](https://github.com/seu-usuario/dice-lab-py)
+  [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+  [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/seu-usuario/dice-lab-py/blob/main/LICENSE)
+</div>
+
+---
+
+## O que é Dice Lab Py?
+
+Dice Lab Py é uma ferramenta educacional e prática para simular jogadas de dados e analisar suas probabilidades. Ideal para estudantes, professores, jogadores de RPG e desenvolvedores de jogos.
+
+## Características Principais
+
+:material-dice-6: **Configuração Flexível**
+:   Escolha quantidade de dados, número de lados e quantidade de jogadas
+
+:material-chart-bar: **Análise Estatística**
+:   Cálculo automático de probabilidades teóricas e comparação com simulações
+
+:material-chart-line: **Gráficos Interativos**
+:   Visualização clara dos resultados com tooltips detalhados
+
+:material-responsive: **Interface Moderna**
+:   Design responsivo que se adapta a qualquer tela
+
+## Início Rápido
+
+```bash
+# Instalar
+pip install flet
+
+# Executar
+python dice_simulator.py
+```
+
+[Começar agora](instalacao.md){ .md-button .md-button--primary }
+[Ver no GitHub](https://github.com/seu-usuario/dice-lab-py){ .md-button }
+
+## Exemplo de Uso
+
+```python
+# Simular 2 dados de 6 lados (2D6)
+quantidade_dados = 2
+lados = 6
+num_jogadas = 1000
+
+# O aplicativo mostra:
+# - Probabilidades teóricas para cada soma (2-12)
+# - Gráfico com resultados da simulação
+# - Comparação entre teórico vs prático
+```
+
+## Casos de Uso
+
+=== "Educação"
+    Perfeito para ensinar conceitos de probabilidade e estatística de forma visual e interativa.
+
+=== "RPG e Jogos"
+    Analise mecânicas de dados, teste probabilidades de sucesso, balance sistemas de jogo.
+
+=== "Pesquisa"
+    Simule eventos probabilísticos, valide modelos estatísticos, demonstre teoremas.
+
+## Próximos Passos
+
+<div class="grid cards" markdown>
+
+-   :material-clock-fast:{ .lg .middle } __Instalação em 5 minutos__
+
+    ---
+
+    Instale e execute o Dice Lab Py rapidamente
+
+    [:octicons-arrow-right-24: Instalação](instalacao.md)
+
+-   :material-book-open-variant:{ .lg .middle } __Tutorial para Iniciantes__
+
+    ---
+
+    Aprenda o básico com exemplos práticos
+
+    [:octicons-arrow-right-24: Tutorial](tutoriais/iniciante.md)
+
+-   :material-api:{ .lg .middle } __Referência da API__
+
+    ---
+
+    Documentação completa de todas as funções
+
+    [:octicons-arrow-right-24: API](api.md)
+
+-   :material-code-braces:{ .lg .middle } __Contribua__
+
+    ---
+
+    Ajude a melhorar o projeto
+
+    [:octicons-arrow-right-24: Desenvolvimento](desenvolvimento.md)
+
+</div>
+```
+
+### 2. docs/instalacao.md
+
+```markdown
+# Instalação
+
+## Requisitos
+
+- Python 3.8 ou superior
+- pip (gerenciador de pacotes)
+
+## Instalação Básica
+
+### Via Git Clone
+
+```bash
+# 1. Clonar o repositório
+git clone https://github.com/seu-usuario/dice-lab-py.git
+cd dice-lab-py
+
+# 2. (Opcional) Criar ambiente virtual
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# Linux/Mac
+source venv/bin/activate
+
+# 3. Instalar dependências
+pip install -r requirements.txt
+
+# 4. Executar
+python dice_simulator.py
+```
+
+### Via Download Direto
+
+1. Baixe o [arquivo ZIP](https://github.com/seu-usuario/dice-lab-py/archive/refs/heads/main.zip)
+2. Extraia em uma pasta
+3. Siga os passos 2-4 acima
+
+## Verificando a Instalação
+
+```bash
+# Verificar versão do Python
+python --version
+# Deve mostrar: Python 3.8.0 ou superior
+
+# Verificar instalação do Flet
+python -c "import flet; print(flet.__version__)"
+# Deve mostrar: 0.25.0 ou superior
+```
+
+## Resolução de Problemas
+
+!!! warning "Problema: ModuleNotFoundError: No module named 'flet'"
+    
+    **Solução**: Instale o Flet
+    ```bash
+    pip install flet
+    ```
+
+!!! warning "Problema: Python não é reconhecido"
+    
+    **Solução**: Adicione Python ao PATH do sistema
+    
+    - Windows: Reinstale Python e marque "Add to PATH"
+    - Linux/Mac: Python geralmente já está no PATH
+
+!!! tip "Dica: Ambiente Virtual"
+    
+    É altamente recomendado usar um ambiente virtual para isolar as dependências:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # ou venv\Scripts\activate no Windows
+    ```
+
+## Próximos Passos
+
+- [Como usar o aplicativo](uso.md)
+- [Exemplos práticos](exemplos.md)
+- [Tutorial para iniciantes](tutoriais/iniciante.md)
+```
+
+### 3. docs/api.md (Com mkdocstrings)
+
+```markdown
+# Referência da API
+
+Esta página documenta todas as funções e componentes do Dice Lab Py.
+
+## Funções Principais
+
+### calcular_probabilidades
+
+::: dice_simulator.calcular_probabilidades
+    options:
+      show_source: true
+      heading_level: 3
+
+### simular_jogadas
+
+::: dice_simulator.simular_jogadas
+    options:
+      show_source: true
+      heading_level: 3
+
+### criar_grafico
+
+::: dice_simulator.criar_grafico
+    options:
+      show_source: true
+      heading_level: 3
+
+## Exemplos de Uso
+
+### Calcular Probabilidades
+
+```python
+from dice_simulator import calcular_probabilidades
+
+# 2 dados de 6 lados
+probabilidades = calcular_probabilidades(2, 6)
+
+print(probabilidades[7])  # 16.666666666666664
+```
+
+### Simular Jogadas
+
+```python
+from dice_simulator import simular_jogadas
+
+# Simular 1000 jogadas de 2D6
+resultados = simular_jogadas(2, 6, 1000)
+
+print(resultados[7])  # ~167 (aproximadamente 16.67% de 1000)
+```
+
+## Tipos de Dados
+
+### Parâmetros Comuns
+
+| Parâmetro | Tipo | Descrição | Exemplo |
+|-----------|------|-----------|---------|
+| `num_dados` | `int` | Quantidade de dados (1-10) | `2` |
+| `lados` | `int` | Lados do dado (2-100) | `6` |
+| `num_jogadas` | `int` | Número de simulações (1-100000) | `1000` |
+
+### Retornos
+
+| Função | Retorno | Descrição |
+|--------|---------|-----------|
+| `calcular_probabilidades` | `dict[int, float]` | Dicionário com somas e probabilidades (%) |
+| `simular_jogadas` | `Counter` | Counter com somas e frequências |
+```
+
+### 4. docs/teoria.md
+
+```markdown
+# Teoria Probabilística
+
+## Conceitos Fundamentais
+
+### O que é Probabilidade?
+
+Probabilidade é a medida da chance de um evento ocorrer. É expressa como um número entre 0 e 1 (ou 0% e 100%).
+
+$$
+P(E) = \frac{\text{Casos Favoráveis}}{\text{Casos Totais}}
+$$
+
+### Exemplo: 1 Dado de 6 Lados
+
+Para um dado justo de 6 lados:
+
+- **Casos totais**: 6 (números de 1 a 6)
+- **Probabilidade de sair 4**: 1/6 ≈ 16.67%
+- **Probabilidade de sair par**: 3/6 = 50%
+
+## Múltiplos Dados
+
+### 2 Dados de 6 Lados (2D6)
+
+Com 2 dados, temos 36 combinações possíveis (6 × 6):
+
+| Soma | Combinações | Probabilidade |
+|------|-------------|---------------|
+| 2    | (1,1)       | 2.78% (1/36)  |
+| 7    | (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) | 16.67% (6/36) |
+| 12   | (6,6)       | 2.78% (1/36)  |
+
+!!! note "Observação"
+    A soma 7 tem a maior probabilidade porque há mais formas de obtê-la.
+
+## Teoremas Importantes
+
+### Lei dos Grandes Números
+
+Quanto mais vezes um experimento é repetido, mais próximos os resultados ficam da probabilidade teórica.
+
+```mermaid
+graph LR
+    A[Poucas Jogadas] -->|Variação Alta| B[Resultados Aleatórios]
+    C[Muitas Jogadas] -->|Variação Baixa| D[Aproxima da Teoria]
+```
+
+### Teorema Central do Limite
+
+Quando múltiplos dados são jogados, a distribuição das somas tende a uma **curva normal** (gaussiana).
+
+!!! example "Exemplo Prático"
+    - 1D6: Distribuição uniforme (todos 16.67%)
+    - 2D6: Começa a formar pico no centro
+    - 10D6: Distribuição quase perfeita em forma de sino
+
+## Aplicações Práticas
+
+### RPG e Jogos
+
+- **D20**: Sistema usado em D&D (distribuição uniforme)
+- **2D6**: Sistema usado em GURPS (curva favorece médias)
+- **Pool de dados**: Analisar múltiplos sucessos
+
+### Simulação de Monte Carlo
+
+Usar simulações aleatórias para resolver problemas complexos.
+
+## Fórmulas Úteis
+
+### Probabilidade de Soma Específica
+
+Para dois dados:
+
+$$
+P(\text{soma} = k) = \frac{\text{min}(k-1, 2n-k+1)}{n^2}
+$$
+
+onde $n$ é o número de lados do dado.
+
+### Valor Esperado (Média)
+
+$$
+E[X] = \text{num\_dados} \times \frac{\text{lados} + 1}{2}
+$$
+
+**Exemplo**: Para 2D6:
+$$
+E[X] = 2 \times \frac{6 + 1}{2} = 7
+$$
+```
+
+---
+
+## 🎨 Temas e Personalização
+
+### Tema Material (Recomendado)
+
+O tema Material oferece:
+- ✅ Design moderno e profissional
+- ✅ Modo claro/escuro automático
+- ✅ Busca avançada
+- ✅ Navegação responsiva
+- ✅ Ícones Material Design
+
+### CSS Customizado
+
+Crie `docs/assets/css/extra.css`:
+
+```css
+/* extra.css */
+
+/* Logo customizado */
+.md-header__button.md-logo {
+  color: var(--md-primary-fg-color);
+}
+
+/* Botões com estilo */
+.md-button {
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+
+/* Cards em grid */
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* Destaque de código */
+.highlight {
+  border-radius: 8px;
+}
+
+/* Tabelas estilizadas */
+table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+```
+
+---
+
+## 🚀 Deploy no GitHub Pages
+
+### Método 1: Deploy Manual
+
+```bash
+# Buildar a documentação
+mkdocs build
+
+# Fazer deploy para GitHub Pages
+mkdocs gh-deploy
+```
+
+### Método 2: GitHub Actions (Automatizado)
+
+Crie `.github/workflows/docs.yml`:
+
+```yaml
+name: Deploy Docs
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      
+      - run: pip install -r requirements-docs.txt
+      
+      - run: mkdocs gh-deploy --force
+```
+
+### Configurar GitHub Pages
+
+1. Vá em **Settings** > **Pages**
+2. Source: **Deploy from a branch**
+3. Branch: **gh-pages** / **root**
+4. Salvar
+
+Sua documentação estará em: `https://seu-usuario.github.io/dice-lab-py/`
+
+---
+
+## 🛠️ Comandos Úteis
+
+```bash
+# Iniciar servidor de desenvolvimento
+mkdocs serve
+# Acesse: http://127.0.0.1:8000
+
+# Servidor em porta diferente
+mkdocs serve -a localhost:8080
+
+# Buildar site estático
+mkdocs build
+
+# Limpar build anterior
+rm -rf site/
+
+# Deploy para GitHub Pages
+mkdocs gh-deploy
+
+# Validar configuração
+mkdocs build --strict
+```
+
+---
+
+## ✅ Checklist de Documentação
+
+Antes de fazer deploy:
+
+- [ ] `mkdocs serve` funciona sem erros
+- [ ] Todos os links internos funcionam
+- [ ] Imagens carregam corretamente
+- [ ] Código de exemplo funciona
+- [ ] Busca retorna resultados relevantes
+- [ ] Responsivo em mobile
+- [ ] Sem warnings no build
+
+---
+
+## 📚 Recursos Adicionais
+
+- [MkDocs Oficial](https://www.mkdocs.org/)
+- [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
+- [MkDocstrings](https://mkdocstrings.github.io/)
+- [Markdown Guide](https://www.markdownguide.org/)
+
+---
+
+**💡 Dica**: Comece simples e vá adicionando seções conforme o projeto cresce!
